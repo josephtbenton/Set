@@ -14,6 +14,8 @@
 		D1DAD0FB2024F8DC00D27874 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1DAD0F92024F8DC00D27874 /* LaunchScreen.storyboard */; };
 		D1DAD1062024F8DC00D27874 /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAD1052024F8DC00D27874 /* SetTests.swift */; };
 		D1DAD1112024F8DC00D27874 /* SetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAD1102024F8DC00D27874 /* SetUITests.swift */; };
+		D1DAD1202028C60800D27874 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAD11F2028C60800D27874 /* SetGame.swift */; };
+		D1DAD1222028C6ED00D27874 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAD1212028C6ED00D27874 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		D1DAD10C2024F8DC00D27874 /* SetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1DAD1102024F8DC00D27874 /* SetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUITests.swift; sourceTree = "<group>"; };
 		D1DAD1122024F8DD00D27874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1DAD11F2028C60800D27874 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		D1DAD1212028C6ED00D27874 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +101,11 @@
 		D1DAD0EF2024F8DC00D27874 /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				D1DAD0F02024F8DC00D27874 /* AppDelegate.swift */,
 				D1DAD0F22024F8DC00D27874 /* ViewController.swift */,
+				D1DAD11F2028C60800D27874 /* SetGame.swift */,
+				D1DAD1212028C6ED00D27874 /* Card.swift */,
 				D1DAD0F42024F8DC00D27874 /* Main.storyboard */,
-				D1DAD0F72024F8DC00D27874 /* Assets.xcassets */,
-				D1DAD0F92024F8DC00D27874 /* LaunchScreen.storyboard */,
+				D1DAD11E2024FD8F00D27874 /* Supporting Files */,
 				D1DAD0FC2024F8DC00D27874 /* Info.plist */,
 			);
 			path = Set;
@@ -123,6 +127,16 @@
 				D1DAD1122024F8DD00D27874 /* Info.plist */,
 			);
 			path = SetUITests;
+			sourceTree = "<group>";
+		};
+		D1DAD11E2024FD8F00D27874 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D1DAD0F72024F8DC00D27874 /* Assets.xcassets */,
+				D1DAD0F92024F8DC00D27874 /* LaunchScreen.storyboard */,
+				D1DAD0F02024F8DC00D27874 /* AppDelegate.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +274,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1DAD0F32024F8DC00D27874 /* ViewController.swift in Sources */,
+				D1DAD1202028C60800D27874 /* SetGame.swift in Sources */,
 				D1DAD0F12024F8DC00D27874 /* AppDelegate.swift in Sources */,
+				D1DAD1222028C6ED00D27874 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,12 +442,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MQ5BBGD8A9;
 				INFOPLIST_FILE = Set/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.josephtbenton.Set;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,12 +459,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MQ5BBGD8A9;
 				INFOPLIST_FILE = Set/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.josephtbenton.Set;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
