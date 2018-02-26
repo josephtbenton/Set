@@ -20,6 +20,7 @@ class SetGame {
             return cards.count
         }
     }
+    let initialCards = 12
     
     init() {
         cards = []
@@ -36,9 +37,9 @@ class SetGame {
                 }
             }
         }
-        cards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: cards) as! Array<Card>
+        shuffle()
         print("\(deckSize) cards added to deck")
-        self.dealCards(n: 12)
+        self.dealCards(n: self.initialCards)
 
     }
     
@@ -52,6 +53,9 @@ class SetGame {
                 }
                 if selectedCards.contains(card) {
                     selectedCards.removeAll()
+                    if drawnCards.count < initialCards {
+                        dealCards(n: 3)
+                    }
                     return
                 }
             }
@@ -67,7 +71,7 @@ class SetGame {
         }
         
         checkSet()
-        if drawnCards.count < 12 {
+        if drawnCards.count < initialCards {
             dealCards(n: 3)
         }
     }
@@ -98,7 +102,7 @@ class SetGame {
             }
             selectedCards.removeAll()
         }
-        if deckSize > n {
+        if deckSize >= n {
             for _ in 1...n {
                 if let card = cards.popLast() {
                     drawnCards.append(card)
@@ -119,6 +123,16 @@ class SetGame {
         else { return false }
         matches += 1
         return true
+    }
+    
+    func shuffle() {
+        self.cards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: cards) as! Array<Card>
+
+    }
+    
+    func shuffleDrawnCards() {
+        self.drawnCards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: drawnCards) as! Array<Card>
+
     }
     
     func match(cards: [Card], on param: (_: Card) -> Int) -> Bool {
