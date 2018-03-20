@@ -1,5 +1,5 @@
 //
-//  Card.swift
+//  SetCard.swift
 //  Set
 //
 //  Created by Joseph Benton on 2/5/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Card {
+struct SetCard {
     let symbol: SetSymbol
     let color: SetColor
     let number: SetNumber
@@ -40,8 +40,8 @@ enum SetShading {
 }
 
 
-extension Card: Equatable {
-    static func ==(lhs: Card, rhs: Card) -> Bool {
+extension SetCard: Equatable {
+    static func ==(lhs: SetCard, rhs: SetCard) -> Bool {
         return lhs.symbol == rhs.symbol && lhs.color == rhs.color && lhs.number == rhs.number && lhs.shading == rhs.shading
     }
 }

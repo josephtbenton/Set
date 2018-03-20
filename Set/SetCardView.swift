@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardView: UIView {
+class SetCardView: UIView {
     
     private struct CardParams {
         static let backgroundColor = UIColor.white
@@ -20,9 +20,10 @@ class CardView: UIView {
         static let cornerRadius = CGFloat(8.0)
     }
     
-    var cardToDraw: Card?
-    var selected = false
-    var inSet: Bool?
+    var cardToDraw: SetCard?
+    var selected = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var inSet: Bool? { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var faceUp = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,11 +40,12 @@ class CardView: UIView {
         
         if let card = cardToDraw {
             drawCard(card, inside: rect)
+        } else {
+            drawBlankCard(inside: rect)
         }
     }
     
-    
-    func drawCard(_ card: Card, inside rect: CGRect) {
+    func drawBlankCard(inside rect: CGRect) {
         let buffer = rect.width * CardParams.cardBufferProp
         let cardFrame = bounds.insetBy(dx: buffer, dy: buffer)
         let roundedRect = UIBezierPath(roundedRect: cardFrame, cornerRadius: CardParams.cornerRadius)
@@ -62,8 +64,12 @@ class CardView: UIView {
         roundedRect.lineWidth = 4
         roundedRect.fill()
         roundedRect.stroke()
+    }
+    
+    func drawCard(_ card: SetCard, inside rect: CGRect) {
+        drawBlankCard(inside: rect)
         
-        
+        guard faceUp else { return }
         
         var centers: [CGPoint] = []
         

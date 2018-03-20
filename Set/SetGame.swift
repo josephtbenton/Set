@@ -10,9 +10,17 @@ import Foundation
 import GameplayKit
 
 class SetGame {
-    var cards: [Card]
-    var drawnCards: [Card]
-    var selectedCards: [Card]
+    var cards: [SetCard]
+    var drawnCards: [SetCard]
+    private var cardsJustDealt: [SetCard]
+    var undrawnCards: [SetCard] {
+        get {
+            let cards = cardsJustDealt
+            cardsJustDealt = []
+            return cards
+        }
+    }
+    var selectedCards: [SetCard]
     var setSelected: Bool?
     var matches: Int
     var deckSize: Int {
@@ -22,9 +30,11 @@ class SetGame {
     }
     let initialCards = 12
     
+    
     init() {
         cards = []
         drawnCards = []
+        cardsJustDealt = []
         selectedCards = []
         matches = 0
         
@@ -32,16 +42,17 @@ class SetGame {
             for color in SetColor.values {
                 for shading in SetShading.values {
                     for symbol in SetSymbol.values {
-                        cards.append( Card(symbol: symbol, color: color, number: number, shading: shading) )
+                        cards.append( SetCard(symbol: symbol, color: color, number: number, shading: shading) )
                     }
                 }
             }
         }
-        shuffle()
+        self.shuffle()
         print("\(deckSize) cards added to deck")
         self.dealCards(n: self.initialCards)
 
     }
+    
     
     func touchCard(at index: Int) {
         let card = drawnCards[index]
@@ -76,10 +87,12 @@ class SetGame {
         }
     }
     
+    
     func isSelected(at index: Int) -> Bool {
         let card = drawnCards[index]
         return selectedCards.contains(card)
     }
+    
     
     func isInSet(at index: Int) -> Bool? {
         if isSelected(at: index) {
@@ -89,9 +102,11 @@ class SetGame {
         }
     }
     
+    
     func checkSet() {
         self.setSelected = isSet(cards: selectedCards)
     }
+    
     
     func dealCards(n: Int) {
         if let setExists = setSelected {
@@ -102,16 +117,19 @@ class SetGame {
             }
             selectedCards.removeAll()
         }
+        
         if deckSize >= n {
             for _ in 1...n {
                 if let card = cards.popLast() {
-                    drawnCards.append(card)
+                    drawnCards.insert(card, at: 0)
+                    cardsJustDealt.append(card)
                 }
             }
         }
     }
     
-    func isSet(cards: [Card]) -> Bool? {
+    
+    func isSet(cards: [SetCard]) -> Bool? {
         guard
             self.selectedCards.count == 3 else { return nil }
         
@@ -125,17 +143,19 @@ class SetGame {
         return true
     }
     
+    
     func shuffle() {
-        self.cards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: cards) as! Array<Card>
-
+        self.cards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: cards) as! Array<SetCard>
     }
+    
     
     func shuffleDrawnCards() {
-        self.drawnCards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: drawnCards) as! Array<Card>
-
+        self.drawnCards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: drawnCards) as! Array<SetCard>
     }
     
-    func match(cards: [Card], on param: (_: Card) -> Int) -> Bool {
+    
+    func match(cards: [SetCard], on param: (_: SetCard) -> Int) -> Bool {
+        return true
         // maps the specified attribute of each card into a set with no duplicates,
         // then checks that it there is only one occurance of attribute, or all unique attributes
         let attributeAppearances = Set(cards.flatMap(param))
